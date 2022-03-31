@@ -36,8 +36,8 @@ class MoviesSpider(CrawlSpider):
 
           "title" : response.xpath("//div[@class='sc-94726ce4-1 iNShGo']/h1/text()").get(),
           "year" : response.xpath("(//span[@class='sc-52284603-2 iTRONr'])[1]/text()").get(),
-          "duration" : response.xpath("(//ul[@class='ipc-inline-list ipc-inline-list--show-dividers sc-52284603-0 blbaZJ baseAlt']/li[position()=last()]/text())[1]").get() + response.xpath("(//ul[@class='ipc-inline-list ipc-inline-list--show-dividers sc-52284603-0 blbaZJ baseAlt']/li[position()=last()]/text())[2]").get() + response.xpath("(//ul[@class='ipc-inline-list ipc-inline-list--show-dividers sc-52284603-0 blbaZJ baseAlt']/li[position()=last()]/text())[3]").get() + response.xpath("(//ul[@class='ipc-inline-list ipc-inline-list--show-dividers sc-52284603-0 blbaZJ baseAlt']/li[position()=last()]/text())[4]").get() + response.xpath("(//ul[@class='ipc-inline-list ipc-inline-list--show-dividers sc-52284603-0 blbaZJ baseAlt']/li[position()=last()]/text())[5]").get() ,
-          "genre" : response.xpath("//div[@class='ipc-chip-list sc-16ede01-4 bMBIRz']/a/span/text()").get(),
+          "duration" : "".join(response.xpath("//*[@id='__next']/main/div/section[1]/section/div[3]/section/section/div[1]/div[1]/div/ul/li[3]/text()").getall()),
+          "genre" : ",".join(response.xpath("//*[@id='__next']/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div/descendant::*/text()").getall()),
           "rating" : response.xpath("(//span[@class='sc-7ab21ed2-1 jGRxWM'])[2]/text()").get(),
           "movie_url" : response.url,
         #   "user-agent" : response.request.headers['User-Agent']
