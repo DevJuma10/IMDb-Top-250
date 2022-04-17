@@ -16,19 +16,24 @@ class SQLlitePipeline(object):
     def open_spider(self, spider):
         self.connection = sqlite3.connect("IMDb.db")
         self.c = self.connection.cursor()
-        self.c.execute('''
-        CREATE TABLE imdb_top_250(
-            title TEXT,
-            year TEXT,
-            duration TEXT,
-            genre TEXT,
-            rating TEXT,
-            movie_url TEXT
-        )
-        ''')
+        
+        try:
+                self.c.execute('''
+                    CREATE TABLE imdb_top_250(
+                        title TEXT,
+                        year TEXT,
+                        duration TEXT,
+                        genre TEXT,
+                        rating TEXT,
+                        movie_url TEXT
+                    )
+                    ''')
 
-        self.connection.commit()
+                self.connection.commit()
 
+        except sqlite3.sqlite3.OperationalError:
+            pass
+        
     def close_spider(self, spider):
         self.connection.close()
 
